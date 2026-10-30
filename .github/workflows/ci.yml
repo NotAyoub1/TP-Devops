@@ -1,0 +1,27 @@
+name: CI
+
+on:
+    push:
+        branches: [main, develop]
+    pull_request:
+        types: [opened, synchronize, reopened]
+        branches: [main, develop]
+
+jobs:
+  tests:
+    name: Tests unitaires PHP
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Récupérer le code source
+        uses: actions/checkout@v4
+
+      - name: Configurer PHP 8.2
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          extensions: mbstring, json
+          coverage: none
+
+      - name: Lancer la suite de tests unitaires
+        run: php tests/run.php
