@@ -53,6 +53,37 @@ class Bibliotheque
         return count($this->livres);
     }
 
+
+    /**
+ * Retourne les statistiques du catalogue.
+ *
+ * @return array Statistiques du catalogue
+ */
+public function statistiques(): array
+{
+    $total = $this->compter();
+    $disponibles = 0;
+
+    foreach ($this->livres as $livre) {
+        if ($livre->estDisponible()) {
+            $disponibles++;
+        }
+    }
+
+    $empruntes = $total - $disponibles;
+
+    $taux = ($total > 0)
+        ? ($disponibles / $total) * 100
+        : 0;
+
+    return [
+        'total' => $total,
+        'disponibles' => $disponibles,
+        'empruntes' => $empruntes,
+        'taux_disponibilite' => round($taux, 2)
+    ];
+}
+
     /**
      * Recherche des livres par mot-cle dans le titre ou l'auteur (insensible a la casse).
      * @return Livre[]
