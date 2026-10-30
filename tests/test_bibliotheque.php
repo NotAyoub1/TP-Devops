@@ -94,4 +94,4 @@ $statsVides = $bibVide->statistiques();
 verifier($statsVides['total'] === 0, 'Catalogue vide : total egal a 0');
 verifier($statsVides['disponibles'] === 0, 'Catalogue vide : aucun livre disponible');
 verifier($statsVides['empruntes'] === 0, 'Catalogue vide : aucun livre emprunte');
-verifier($statsVides['taux_disponibilite'] === 0, 'Catalogue vide : taux de disponibilite egal a 0');
+verifier($statsVides['taux_disponibilite'] === 0.0, 'Catalogue vide : taux de disponibilite egal a 0');
